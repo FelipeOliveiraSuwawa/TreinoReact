@@ -22,9 +22,41 @@ const stages = [
 function App() {
 
   const [gameStage, setgameStage] = useState(stages[0].name)
-  const [words] = useState(wordsList)
+  const [words] = useState(wordsList);
+
+  const [pickedWord, setPickedWord] = useState("");
+  const [pickedCategory, setPickedCategory] = useState("");
+  const [letters, setLetter] = useState([])
+
+  const pickWordCategory = ()=>{
+    console.log(words)
+    //pegar uma categoria aleatoria
+    const categories = Object.keys(words) /* categories vai pegar o o words q recebeu é o wordlist importado e vai pegar as keys delas que sao nos caso os temas */
+    // console.log(Object.keys)
+    console.log(categories)
+    const category = categories[Math.floor(Math.random() * Object.keys(categories).length )]
+    console.log(category);
+
+    // pegar uma palavra aleatoria
+      const word = words[category][Math.floor(Math.random() * words[category].length )]
+      console.log(word);
+
+      return {word, category}
+  }
   
   const startGame = ()=>{
+    // pick word and category
+      const {word, category} = pickWordCategory();
+      let wordLetters = word.split("");
+      wordLetters = wordLetters.map((l)=> l.toLowerCase())
+      console.log(word,category)
+      console.log(wordLetters);
+      
+      //set states
+        setPickedWord(word)
+        setPickedCategory(category)
+        setLetter(letters)
+
     setgameStage(stages[1].name)
   }
 
