@@ -66,8 +66,8 @@ function App() {
   }
 
   // 正かどうか自動的に確認してもらうスクリプト
-  const verifyLetter = ()=>{
-    setgameStage(stages[2].name)
+  const verifyLetter = (letter)=>{
+    console.log(letter)
   }
 
   const retry = ()=>{
