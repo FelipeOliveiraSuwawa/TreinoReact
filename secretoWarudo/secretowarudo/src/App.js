@@ -19,6 +19,8 @@ const stages = [
   {id:3, name:'end'}
 ];
 
+const GuessesQty = 3
+
 function App() {
 
   const [gameStage, setgameStage] = useState(stages[0].name)
@@ -30,7 +32,7 @@ function App() {
 
   const [guessedLetters, setGuessedLetters] = useState([])
   const [wrongLetters,setWrongLetters] = useState([])
-  const [guesses, setGuesses] = useState(3)
+  const [guesses, setGuesses] = useState(GuessesQty)
   const [score,setScore] = useState(0)
 
   const pickWordCategory = ()=>{
@@ -67,10 +69,49 @@ function App() {
 
   // 正かどうか自動的に確認してもらうスクリプト
   const verifyLetter = (letter)=>{
-    console.log(letter)
-  }
+    console.log(letters)
+    const normalizedLetter = letter.toLowerCase()
+
+    //もう使った字かどうかチェック
+    if(guessedLetters.includes(normalizedLetter)|| wrongLetters.includes(normalizedLetter)){
+      return;
+    }
+
+    if(letters.includes(normalizedLetter)){
+      setGuessedLetters((actualGuessedLetters)=>[
+        ...actualGuessedLetters,
+        normalizedLetter
+      ])
+    }
+    else{
+        setWrongLetters((actualWrongLetters)=>[
+          ...actualWrongLetters,
+          normalizedLetter
+        ])
+        setGuesses((actualGuesses)=> actualGuesses - 1)
+    }
+
+  };
+ console.log(guessedLetters)
+ console.log(wrongLetters)
+
+
+  const clearLettersStates = ()=>{
+    setGuessedLetters([])
+    setWrongLetters([])
+  } 
+
+ useEffect(() => {
+      if(guesses <=0){
+        clearLettersStates();
+        setgameStage(stages[2].name)
+      }
+ },[guesses])
 
   const retry = ()=>{
+    setScore(0)
+    setGuesses(GuessesQty)
+    
     setgameStage(stages[0].name)
   }
 
