@@ -17,13 +17,13 @@ const Game = ({ verifyLetter, pickedWord,pickedCategory,letters,guessedLetters,w
   return (
     <div className='game'>
       <p className="points">
-        <span>Pontuação:{score}</span>
+        <span>スコア:{score}</span>
       </p>
-        <h1>Adivinhe a Palavra:</h1>
+        <h1>言葉を当ててください:</h1>
         <h3 className='tip'>
-          Dica sobre a palavra <span>{pickedCategory}</span>
+          言葉のヒント <span>{pickedCategory}</span>
         </h3>
-        <p>Voce ainda tem {guesses} attemps(s).</p>
+        <p>あなたはまだ{guesses}トライがあります(s).</p>
         <div className="wordContainer">
            {letters.map((letter,i)=> (
               guessedLetters.includes(letter) ? (
@@ -34,14 +34,15 @@ const Game = ({ verifyLetter, pickedWord,pickedCategory,letters,guessedLetters,w
            ))}
         </div>
         <div className="letterContainer">
-          <p>Tente a adivinhar a letra da palavra:</p>
+          <p>言葉の字を的確に当ててみてください:</p>
           <form onSubmit={handleSubmit}>
             <input type="text" name='letter' maxLength="1" required onChange={(e)=>setLetter(e.target.value)} value={letter} ref={letterInputRef} />
-            <button>Jogar</button>
+            <p className='wo'>を</p>
+            <button>やってみる</button>
           </form>
         </div>
         <div className="wrongLettersContainer">
-          <p>Letras ja Ultilizadas:</p>
+          <p>すでに使った字:</p>
           {wrongLetters.map((letter,i)=>(
             <span key={i}>{letter}, </span>
           ))}

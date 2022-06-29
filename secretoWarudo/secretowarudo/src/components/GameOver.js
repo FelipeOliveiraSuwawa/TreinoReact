@@ -4,8 +4,8 @@ import './GameOver.css'
 const GameOver = ({retry, score}) => {
   return (
     <div>
-      <h1>GameOver</h1>
-      <h2>A sua Pontuação foi : <span>{score}</span></h2>
+      <h1>ゲームオーバー</h1>
+      <h2>あなたのスコアは : <span>{score}</span></h2>
       <button onClick={retry}>Retry</button>
     </div>
   )
