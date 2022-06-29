@@ -35,7 +35,7 @@ function App() {
   const [guesses, setGuesses] = useState(GuessesQty)
   const [score,setScore] = useState(0)
 
-  const pickWordCategory = ()=>{
+  const pickWordCategory = useCallback(()=>{
     console.log(words)
     //pegar uma categoria aleatoria
     const categories = Object.keys(words) /* categories vai pegar o o words q recebeu é o wordlist importado e vai pegar as keys delas que sao nos caso os temas */
@@ -49,9 +49,11 @@ function App() {
       console.log(word);
 
       return {word, category}
-  }
+  },[words]);
   
-  const startGame = ()=>{
+  const startGame = useCallback(()=>{
+    //clear letter
+    clearLettersStates()
     // pick word and category
       const {word, category} = pickWordCategory();
       let wordLetters = word.split("");
@@ -65,8 +67,7 @@ function App() {
         setLetter(wordLetters)
 
     setgameStage(stages[1].name)
-  }
-
+  },[pickWordCategory]);
   // 正かどうか自動的に確認してもらうスクリプト
   const verifyLetter = (letter)=>{
     console.log(letters)
@@ -108,6 +109,19 @@ function App() {
       }
  },[guesses])
 
+  useEffect(()=>{
+      const uniqueLetters = [...new Set(letters)];
+      console.log(uniqueLetters)
+      if(guessedLetters.length === uniqueLetters.length){
+        setScore((actualScore)=> actualScore += 100);
+
+        startGame()
+      }
+
+  },[guessedLetters,letters,startGame])
+
+
+
   const retry = ()=>{
     setScore(0)
     setGuesses(GuessesQty)
@@ -119,7 +133,7 @@ function App() {
     <div className="App">
       {gameStage === 'start' && <StartScreen startGame={startGame} />}
       {gameStage === 'game' && <Game  verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessedLetters={guessedLetters} wrongLetters={wrongLetters} guesses={guesses} score={score}/>}
-      {gameStage === 'end' && <GameOver retry={retry} />}
+      {gameStage === 'end' && <GameOver retry={retry} score={score} />}
     </div>
   );
 }
