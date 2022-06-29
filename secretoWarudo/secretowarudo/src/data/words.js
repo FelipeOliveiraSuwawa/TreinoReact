@@ -1,8 +1,9 @@
 export const wordsList = {
-    carro: ["Motor", "Porta", "Capô", "Pneu", "Antena"],
-    fruta: ["Banana", "Maçã", "Pêra", "Mamão", "Laranja"],
-    corpo: ["Braço", "Perna", "Cérebro", "Pescoço", "Olhos"],
-    computador: ["Mouse", "Teclado", "Monitor", "Gabinete"],
-    programação: ["Linguagem", "Framework", "JavaScript", "React"],
-    alimento: ["Arroz", "Feijão", "Carne", "Leite", "Ovo"],
+    car: ["Motor", "Door", "Hood", "Tire", "Antenna"],
+    fruit: ["Banana", "Apple", "Watermelon", "Papaya", "Orange"],
+    body: ["Arm", "Leg", "Brain", "Neck", "Eyes"],
+    computer: ["Mouse", "Keyboard", "Monitor", "Headset"],
+    programming: ["Language", "Framework", "JavaScript", "React"],
+    food: ["Rice", "Beans", "Meat", "Milk", "Egg"],
+    KawaiiJapanesesGirls:["Nanakasuwa","Taniasami","Shukasaito","Furihataai","Oshimamiku","Kuritaemi","Usa","Kanakotakatsuki","InamiAnju"]
   };
