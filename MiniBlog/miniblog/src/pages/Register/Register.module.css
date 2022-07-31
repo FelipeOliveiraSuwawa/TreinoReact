@@ -1,7 +1,7 @@
-.register{
-
-}
-
-.register p{
+.register {
+    text-align: center;
+  }
+  
+  .register p {
     color: #aaa;
-}
+  }
