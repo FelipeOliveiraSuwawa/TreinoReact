@@ -1,12 +1,12 @@
 import { db } from "../firebase/config"
 
-import{
+import {
     getAuth,
     createUserWithEmailAndPassword,
-    signInWhithEmailAndPassword,
+    signInWithEmailAndPassword,
     updateProfile,
-    signOut
-} from 'firebase/auth'
+    signOut,
+  } from "firebase/auth";
 
 import {useState, useEffect} from 'react'
 
@@ -69,6 +69,33 @@ export const useAuthentication = ()=>{
         checkIfIsCancelled()
 
         signOut(auth)
+    };
+
+    //Login
+    const login = async(data) =>{
+        checkIfIsCancelled();
+        setLoading(true)
+        setError(false)
+
+        try {
+            await signInWithEmailAndPassword(auth,data.email,data.password);
+            setLoading(false)
+        } catch (error) {
+            let systemErrorMessage;
+            if(error.message.includes("user-not-found")){
+                systemErrorMessage = "User not found try again";
+            }
+            else if(error.message.includes("wrong-password")){
+                systemErrorMessage = "Wrong Password try again"
+            }
+            else{
+                systemErrorMessage = "unexpected error has been detected try again"
+            }
+
+            setError(systemErrorMessage)
+            setLoading(false)
+        }
+
     }
 
     useEffect(()=>{
@@ -81,5 +108,6 @@ export const useAuthentication = ()=>{
         error,
         loading,
         logout,
+        login,
     }
 }
