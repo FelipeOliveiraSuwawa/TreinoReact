@@ -41,7 +41,7 @@ const Register = () => {
         setError(authError)
       }
 
-    }, [authError])
+    }, [authError]);
 
   return (
     <div className={styles.register}>
